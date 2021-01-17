@@ -1,0 +1,12 @@
+{
+  "id" : "id",
+  "lessonId" : "lessonId",
+  "inputQuestions" : [ {
+    "id" : "id",
+    "displayOrder" : 1,
+    "question" : "question1",
+    "standardAnswer" : "standardAnswer",
+    "maxScore" : 5
+  } ],
+  "createdAt" : "2020-10-21T10:11:12Z"
+}

@@ -5,7 +5,7 @@ import java.time.Year
 plugins {
     kotlin("jvm")
     kotlin("plugin.spring")
-    id("org.springframework.boot") version "2.3.7.RELEASE"
+    id("org.springframework.boot") version "2.4.2"
 
     // Add git info to the Info actuator
     id("com.gorylenko.gradle-git-properties") version "2.2.2"

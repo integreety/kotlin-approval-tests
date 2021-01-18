@@ -1,5 +1,6 @@
 package com.integreety.activityengine.rest
 
+import com.integreety.activityengine.api.request.ActivityRequest
 import com.integreety.activityengine.api.shared.question.InputQuestion
 import com.integreety.activityengine.config.objectmapper.ObjectMapperCreator
 import com.integreety.activityengine.dto.ActivityDto
@@ -9,9 +10,12 @@ import com.oneeyedmen.okeydoke.junit5.KotlinApprovalsExtension
 import io.mockk.every
 import io.mockk.mockk
 import org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric
+import org.jeasy.random.EasyRandom
+import org.jeasy.random.EasyRandomParameters
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import java.time.ZonedDateTime
+import java.util.*
 
 @ExtendWith(KotlinApprovalsExtension::class)
 class ActivityControllerShould {
@@ -35,6 +39,27 @@ class ActivityControllerShould {
         every { activityService.find(activityId) } returns anActivityWithQuestions()
 
         val result = underTest.find(activityId)
+
+        approver.assertApproved(objectWriter.writeValueAsString(result))
+    }
+
+    @Test
+    fun `accept an approved format of Activity without questions`(approver: Approver) {
+        every { activityService.save(any()) } returns anActivity()
+        val activityRequest = ActivityRequest(lessonId = UUID.randomUUID().toString())
+
+        val result = underTest.save(activityRequest)
+
+        approver.assertApproved(objectWriter.writeValueAsString(result))
+    }
+
+    @Test
+    fun `accept an approved format of Activity with questions`(approver: Approver) {
+        every { activityService.save(any()) } returns anActivityWithQuestions()
+        val easyRandom = EasyRandom(EasyRandomParameters().collectionSizeRange(1, 1))
+        val activityRequest = easyRandom.nextObject(ActivityRequest::class.java)
+
+        val result = underTest.save(activityRequest)
 
         approver.assertApproved(objectWriter.writeValueAsString(result))
     }

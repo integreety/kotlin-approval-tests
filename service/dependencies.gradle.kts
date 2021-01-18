@@ -21,6 +21,9 @@ dependencies {
     testImplementation("com.oneeyedmen:okeydoke:1.3.1") {
         because("we want to support approval tests")
     }
+    testImplementation ("org.jeasy:easy-random-core:4.2.0") {
+        because("we want to be able to easily create entire object trees with random values")
+    }
 
     // JUnit 5
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0") {

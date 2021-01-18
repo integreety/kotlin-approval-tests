@@ -9,6 +9,9 @@ plugins {
 
     // Add git info to the Info actuator
     id("com.gorylenko.gradle-git-properties") version "2.2.2"
+
+    // Coverage plugin
+    id("jacoco")
 }
 
 apply(plugin = "java")
@@ -31,6 +34,15 @@ tasks.withType<Test> {
         events = mutableSetOf(SKIPPED, FAILED)
     }
 }
+
+tasks.jacocoTestReport {
+    reports {
+        csv.isEnabled = true
+        csv.destination = File("${buildDir}/reports/jacoco/csv/jacoco.csv")
+    }
+}
+
+tasks["test"].finalizedBy(tasks["jacocoTestReport"])
 
 apply {
     from("dependencies.gradle.kts")

@@ -5,8 +5,24 @@
 version: 2.1
 orbs:
   codecov: codecov/codecov@1.0.2
-jobs:
 
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 3 * * *"
+          filters:
+            branches:
+              only:
+                - build
+    jobs:
+      - build
+
+jobs:
   build:
     docker:
       # specify the version you desire here

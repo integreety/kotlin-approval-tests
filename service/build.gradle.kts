@@ -28,12 +28,16 @@ springBoot {
     }
 }
 
-tasks.withType<Test> {
+tasks.test {
     useJUnitPlatform()
     testLogging {
         events = mutableSetOf(SKIPPED, FAILED)
     }
 }
+
+//////////////////////////////////
+// Jacoco coverage settings
+tasks["test"].finalizedBy(tasks["jacocoTestReport"])
 
 tasks.jacocoTestReport {
     reports {
@@ -41,9 +45,18 @@ tasks.jacocoTestReport {
         csv.destination = File("${buildDir}/reports/jacoco/csv/jacoco.csv")
         xml.isEnabled = true
     }
+    classDirectories.setFrom(
+            files(classDirectories.files.map {
+                fileTree(it) {
+                    exclude(
+                            "**/com/integreety/activityengine/config/**",
+                            "**/com/integreety/activityengine/dto/**",
+                            "**/com/integreety/activityengine/*Application**",
+                            "**/com/integreety/activityengine/service/**")
+                }
+            })
+    )
 }
-
-tasks["test"].finalizedBy(tasks["jacocoTestReport"])
 
 apply {
     from("dependencies.gradle.kts")

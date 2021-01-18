@@ -1,6 +1,6 @@
 # TODO
 - add description to README
-- maybe add some unit tests
+- add approved requests
 
 # kotlin-approval-tests
 

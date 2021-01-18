@@ -74,11 +74,7 @@ class ActivityControllerShould {
     }
 
     private fun anActivityWithQuestions(): ActivityDto {
-
-        return ActivityDto(
-                id = "id",
-                lessonId = "lessonId",
-                maxScore = 5,
+        return anActivity().copy(
                 inputQuestions = listOf(
                         InputQuestion(
                                 id = "id",
@@ -88,7 +84,6 @@ class ActivityControllerShould {
                                 displayOrder = 1
                         )
                 ),
-                createdAt = ZonedDateTime.parse("2020-10-21T10:11:12Z")
         )
     }
 }

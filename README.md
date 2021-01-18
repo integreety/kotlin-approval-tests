@@ -1,3 +1,7 @@
+# TODO
+- add description to README
+- maybe add some unit tests
+
 # kotlin-approval-tests
 
 ![GitHub](https://img.shields.io/github/license/integreety/kotlin-approval-tests) 

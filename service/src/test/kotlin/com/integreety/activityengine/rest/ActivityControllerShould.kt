@@ -4,9 +4,9 @@ import com.integreety.activityengine.api.request.ActivityRequest
 import com.integreety.activityengine.api.shared.question.InputQuestion
 import com.integreety.activityengine.config.objectmapper.ObjectMapperCreator
 import com.integreety.activityengine.dto.ActivityDto
+import com.integreety.activityengine.extension.ResourcesApprovalsExtension
 import com.integreety.activityengine.service.ActivityService
 import com.oneeyedmen.okeydoke.Approver
-import com.oneeyedmen.okeydoke.junit5.KotlinApprovalsExtension
 import io.mockk.every
 import io.mockk.mockk
 import org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import java.time.ZonedDateTime
 import java.util.*
 
-@ExtendWith(KotlinApprovalsExtension::class)
+@ExtendWith(ResourcesApprovalsExtension::class)
 class ActivityControllerShould {
 
     private val activityId = randomAlphanumeric(36)

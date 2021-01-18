@@ -39,6 +39,7 @@ tasks.jacocoTestReport {
     reports {
         csv.isEnabled = true
         csv.destination = File("${buildDir}/reports/jacoco/csv/jacoco.csv")
+        xml.isEnabled = true
     }
 }
 
